@@ -33,7 +33,7 @@ namespace regexp {
 
   internal class Program {
     public static void Main(string[] args) {
-      Console.WriteLine("Введите полный адрес выходного файла и его название");
+      Console.WriteLine("Введите полный адрес входного файла и его название");
       string inPath = Console.ReadLine();
       StreamReader sr;
 
