@@ -16,7 +16,7 @@ namespace regexp {
       {'D', 500},
       {'M', 1000}
     };
-
+  
     public static int Decode(string number) {
       int answer = 0;
       int previousDigit = 0;
@@ -26,7 +26,7 @@ namespace regexp {
         answer += currentDigit < previousDigit ? -currentDigit : currentDigit;
         previousDigit = currentDigit;
       }
-
+  
       return answer;
     }
   }
@@ -37,6 +37,7 @@ namespace regexp {
       string inPath = Console.ReadLine();
       StreamReader sr;
 
+      //D:\programming\CSharpProjects\regexp\regexp\input.txt
       try {
         sr = new StreamReader(inPath ?? throw new InvalidOperationException());
         if (sr.EndOfStream) {
@@ -61,7 +62,7 @@ namespace regexp {
         return;
       }
 
-      Regex regex = new Regex(@"[IVXLCDM]+");
+      Regex regex = new Regex(@"M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})");
       string text = sr.ReadToEnd();
       MatchCollection matches = regex.Matches(text);
 
