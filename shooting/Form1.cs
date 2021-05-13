@@ -10,6 +10,9 @@ namespace shooting {
     private int _hitRate = 0;
     private int _missRate = 0;
 
+    private int _xCoordKeyboardShot;
+    private int _yCoordKeyboardShot;
+
     private int H = 1200;
     private int W = 900;
 
@@ -135,6 +138,33 @@ namespace shooting {
 
     private void buttonNewGame_Click(object sender, EventArgs e) {
       ResetTarget();
+      Invalidate();
+    }
+
+    private void textBoxXCoord_TextChanged(object sender, EventArgs e) {
+      _xCoordKeyboardShot = Convert.ToInt32(textBoxXCoord.Text);
+    }
+
+    private void textBoxYCoord_TextChanged(object sender, EventArgs e) {
+      _yCoordKeyboardShot = Convert.ToInt32(textBoxYCoord.Text);
+    }
+
+    private void buttonShotKeyboard_Click(object sender, EventArgs e) {
+      Point shotCoordinates = new Point(_xCoordKeyboardShot - 12, _yCoordKeyboardShot - 35);
+      _shotsArr[_pointIndex] = shotCoordinates;
+      ++_pointIndex;
+
+      if (_pointIndex == 50) {
+        _pointIndex = 0;
+      }
+
+      Point hitCoordinates =
+        new Point(shotCoordinates.X + 5, shotCoordinates.Y + 5); // we need center of point, where diameter 10
+      HitCheck(hitCoordinates);
+
+      labelHitRate.Text = _hitRate.ToString();
+      labelMissRate.Text = _missRate.ToString();
+
       Invalidate();
     }
   }

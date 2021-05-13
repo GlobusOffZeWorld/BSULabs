@@ -31,6 +31,11 @@
       this.labelMissName = new System.Windows.Forms.Label();
       this.labelInputRadius = new System.Windows.Forms.Label();
       this.buttonNewGame = new System.Windows.Forms.Button();
+      this.textBoxXCoord = new System.Windows.Forms.TextBox();
+      this.textBoxYCoord = new System.Windows.Forms.TextBox();
+      this.labelXCoord = new System.Windows.Forms.Label();
+      this.labelYCoord = new System.Windows.Forms.Label();
+      this.buttonShotKeyboard = new System.Windows.Forms.Button();
       this.SuspendLayout();
       // 
       // textBoxInputRadius
@@ -91,17 +96,64 @@
       this.buttonNewGame.UseVisualStyleBackColor = true;
       this.buttonNewGame.Click += new System.EventHandler(this.buttonNewGame_Click);
       // 
+      // textBoxXCoord
+      // 
+      this.textBoxXCoord.Location = new System.Drawing.Point(12, 220);
+      this.textBoxXCoord.Name = "textBoxXCoord";
+      this.textBoxXCoord.Size = new System.Drawing.Size(100, 20);
+      this.textBoxXCoord.TabIndex = 0;
+      this.textBoxXCoord.TextChanged += new System.EventHandler(this.textBoxXCoord_TextChanged);
+      // 
+      // textBoxYCoord
+      // 
+      this.textBoxYCoord.Location = new System.Drawing.Point(12, 280);
+      this.textBoxYCoord.Name = "textBoxYCoord";
+      this.textBoxYCoord.Size = new System.Drawing.Size(100, 20);
+      this.textBoxYCoord.TabIndex = 0;
+      this.textBoxYCoord.TextChanged += new System.EventHandler(this.textBoxYCoord_TextChanged);
+      // 
+      // labelXCoord
+      // 
+      this.labelXCoord.Location = new System.Drawing.Point(12, 203);
+      this.labelXCoord.Name = "labelXCoord";
+      this.labelXCoord.Size = new System.Drawing.Size(100, 14);
+      this.labelXCoord.TabIndex = 3;
+      this.labelXCoord.Text = "X coord for shot";
+      // 
+      // labelYCoord
+      // 
+      this.labelYCoord.Location = new System.Drawing.Point(12, 260);
+      this.labelYCoord.Name = "labelYCoord";
+      this.labelYCoord.Size = new System.Drawing.Size(100, 17);
+      this.labelYCoord.TabIndex = 3;
+      this.labelYCoord.Text = "Y coord for shot";
+      // 
+      // buttonShotKeyboard
+      // 
+      this.buttonShotKeyboard.Location = new System.Drawing.Point(12, 306);
+      this.buttonShotKeyboard.Name = "buttonShotKeyboard";
+      this.buttonShotKeyboard.Size = new System.Drawing.Size(75, 23);
+      this.buttonShotKeyboard.TabIndex = 4;
+      this.buttonShotKeyboard.Text = "Shot!";
+      this.buttonShotKeyboard.UseVisualStyleBackColor = true;
+      this.buttonShotKeyboard.Click += new System.EventHandler(this.buttonShotKeyboard_Click);
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1200, 900);
+      this.Controls.Add(this.buttonShotKeyboard);
+      this.Controls.Add(this.labelYCoord);
+      this.Controls.Add(this.labelXCoord);
       this.Controls.Add(this.buttonNewGame);
       this.Controls.Add(this.labelMissRate);
       this.Controls.Add(this.labelMissName);
       this.Controls.Add(this.labelInputRadius);
       this.Controls.Add(this.labelHitName);
       this.Controls.Add(this.labelHitRate);
+      this.Controls.Add(this.textBoxYCoord);
+      this.Controls.Add(this.textBoxXCoord);
       this.Controls.Add(this.textBoxInputRadius);
       this.Name = "Form1";
       this.Text = "Target";
@@ -110,6 +162,15 @@
       this.ResumeLayout(false);
       this.PerformLayout();
     }
+
+    private System.Windows.Forms.Button buttonShotKeyboard;
+
+    private System.Windows.Forms.Label labelYCoord;
+
+    private System.Windows.Forms.Label labelXCoord;
+
+    private System.Windows.Forms.TextBox textBoxXCoord;
+    private System.Windows.Forms.TextBox textBoxYCoord;
 
     private System.Windows.Forms.Button buttonNewGame;
 
