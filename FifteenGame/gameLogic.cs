@@ -144,7 +144,7 @@ namespace fifteenGame {
       }
 
       if ((InversionCount % 2) == 0) {
-        MessageBox.Show(@"AAAAAAAAAAAAAAAAAA");
+        MessageBox.Show(@"You cant win this game!");
         return false;
       }
       

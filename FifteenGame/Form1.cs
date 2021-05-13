@@ -4,22 +4,31 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace fifteenGame {
   public partial class Form1 : Form {
     private GameLogic game;
     private static int _stepCount;
     private static int _timeCount;
+    private DateTime _gameStartTime;
+    private List<Results> _resultsArray;
+    private DateTime _dateToDelete;
+    private string _playerName;
+
 
     public Form1() {
       InitializeComponent();
       _stepCount = 0;
       _timeCount = 0;
+      ResultsArray = new List<Results>();
+      Deserialize();
       game = new GameLogic();
       GameReconstructor();
     }
@@ -34,11 +43,34 @@ namespace fifteenGame {
       set => _timeCount = value;
     }
 
+    public DateTime GameStartTime {
+      get => _gameStartTime;
+      set => _gameStartTime = value;
+    }
+
+    public DateTime DateToDelete {
+      get => _dateToDelete;
+      set => _dateToDelete = value;
+    }
+
+    public string PlayerName {
+      get => _playerName;
+      set => _playerName = value;
+    }
+
+    public List<Results> ResultsArray {
+      get => _resultsArray;
+      set => _resultsArray = value;
+    }
+
     private void button_Click(object sender, EventArgs e) {
       game.PressButton(Convert.ToInt32(((Button) sender).Tag));
       UpdateField();
       labelStepCountNumbers.Text = (++StepCount).ToString();
       if (game.GameFinish()) {
+        Results results = new Results($"{PlayerName}", GameStartTime, TimeCount, StepCount);
+        ResultsArray.Add(results);
+        Serialize();
         MessageBox.Show(@"You won!", @"Congratulations");
       }
     }
@@ -115,12 +147,12 @@ namespace fifteenGame {
       game.GameBeginning();
       UpdateField();
     }
-    
+
     private void GameReconstructor() {
+      GameStartTime = DateTime.Now;
+      textBoxPlayerName.Clear();
+      PlayerName = "";
       FieldReset();
-      if (!game.IsGameImpossible()) {
-        FieldReset();
-      }
     }
 
     private void buttonNewGame_Click(object sender, EventArgs e) {
@@ -141,6 +173,67 @@ namespace fifteenGame {
       TimeCount = 0;
       labelStepCountNumbers.Text = StepCount.ToString();
       labelTimerTime.Text = TimeCount.ToString();
+    }
+
+    private void Serialize() {
+      XmlSerializer formatter = new XmlSerializer(typeof(List<Results>));
+      using (FileStream fs = new FileStream("PlayersResults.xml", FileMode.Create)) {
+        formatter.Serialize(fs, ResultsArray);
+      }
+    }
+
+    public void Deserialize() {
+      XmlSerializer formatter = new XmlSerializer(typeof(List<Results>));
+      using (FileStream fs = new FileStream("PlayersResults.xml", FileMode.OpenOrCreate)) {
+        ResultsArray = (List<Results>) formatter.Deserialize(fs);
+      }
+    }
+
+    private void buttonBestOfMoves_Click(object sender, EventArgs e) {
+      List<Results> resultsForOutput = new List<Results>(ResultsArray);
+      resultsForOutput.Sort((first, second) => first.NumberOfMoves.CompareTo(second.NumberOfMoves));
+      string output = "";
+      for (int i = 0; i < resultsForOutput.Capacity && i < 10; ++i) {
+        output += resultsForOutput[i] + "\n";
+      }
+
+      MessageBox.Show(output == "" ? "result list is empty" : output);
+    }
+
+    private void buttonOfTime_Click(object sender, EventArgs e) {
+      List<Results> resultsForOutput = new List<Results>(ResultsArray);
+      resultsForOutput.Sort((first, second) => first.GameDuration.CompareTo(second.GameDuration));
+      string output = "";
+      for (int i = 0; i < resultsForOutput.Capacity && i < 10; ++i) {
+        output += resultsForOutput[i] + "\n";
+      }
+
+      MessageBox.Show(output == "" ? "result list is empty" : output);
+    }
+
+    private void buttonLastGames_Click(object sender, EventArgs e) {
+      List<Results> resultsForOutput = new List<Results>(ResultsArray);
+      resultsForOutput.Sort((first, second) => second.GameStartTime.CompareTo(first.GameStartTime));
+      string output = "";
+      for (int i = 0; i < resultsForOutput.Capacity && i < 10; ++i) {
+        output += resultsForOutput[i] + "\n";
+      }
+
+      MessageBox.Show(output == "" ? "result list is empty" : output);
+    }
+
+    private void dateTimePicker1_ValueChanged(object sender, EventArgs e) {
+      DateToDelete = dateTimePicker1.Value;
+    }
+
+    private void buttonDeleteResults_Click(object sender, EventArgs e) {
+      ResultsArray.RemoveAll(res => res.GameStartTime < DateToDelete);
+      Serialize();
+      Deserialize();
+    }
+
+    private void textBoxPlayerName_TextChanged(object sender, EventArgs e) {
+      PlayerName = textBoxPlayerName.Text;
     }
   }
 }
