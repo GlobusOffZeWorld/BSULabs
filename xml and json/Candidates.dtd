@@ -1,0 +1,18 @@
+<!ELEMENT candidates (candidate)*>
+        <!ELEMENT candidate (dishes)?>
+        <!ATTLIST candidate
+                name CDATA #REQUIRED>
+        <!ELEMENT dishes (dish)*>
+        <!ELEMENT dish (category,timetocook,minimumservings,ingredients)+>
+        <!ATTLIST dish
+                name CDATA #REQUIRED>
+        <!ELEMENT category (#PCDATA)>
+        <!ATTLIST category
+                type (day-to-day|premium|exclusive) #REQUIRED>
+        <!ELEMENT timetocook (#PCDATA)>
+        <!ELEMENT minimumservings (#PCDATA)>
+        <!ELEMENT ingredients (ingredient)+>
+        <!ELEMENT ingredient (count)+>
+        <!ATTLIST ingredient
+                name CDATA #REQUIRED>
+        <!ELEMENT count (#PCDATA)>

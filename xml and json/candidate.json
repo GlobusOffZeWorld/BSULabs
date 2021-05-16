@@ -1,0 +1,38 @@
+﻿{
+  "Egor": {
+    "candidate": "Egor",
+    "dishes": {
+      "pelmeny": {
+        "type": "exclusive",
+        "timeToCook": 10,
+        "minimumServingsValue": 25,
+        "ingredients": {
+          "tomato": 10,
+          "cucumber": 25
+        }
+      }
+    }
+  },
+  "Lexa": {
+    "candidate": "Lexa",
+    "dishes": {
+      "chicken": {
+        "type": "premium",
+        "timeToCook": 45,
+        "minimumServingsValue": 1,
+        "ingredients": {
+          "fresh chicken": 1,
+          "spice": 1
+        }
+      },
+      "pasta": {
+        "type": "day-to-day",
+        "timeToCook": 18,
+        "minimumServingsValue": 1,
+        "ingredients": {
+          "macaroni": 100
+        }
+      }
+    }
+  }
+}

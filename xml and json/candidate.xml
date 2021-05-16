@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE candidates SYSTEM "Candidates.dtd">
+<candidates>
+    <candidate name="Egor">
+        <dishes>
+            <dish name="pelmeny">
+                <category type="exclusive">
+                </category>
+                <timetocook>10</timetocook>
+                <minimumservings>25</minimumservings>
+                <ingredients>
+                    <ingredient name="tomato">
+                        <count>10</count>
+                    </ingredient>
+                    <ingredient name="cucumber">
+                        <count>25</count>
+                    </ingredient>
+                </ingredients>
+            </dish>
+        </dishes>
+    </candidate>
+    <candidate name="Lexa">
+        <dishes>
+            <dish name="Chicken">
+                <category type="premium">
+                </category>
+                <timetocook>45</timetocook>
+                <minimumservings>1</minimumservings>
+                <ingredients>
+                    <ingredient name="fresh chicken">
+                        <count>1</count>
+                    </ingredient>
+                    <ingredient name="spice">
+                        <count>1</count>
+                    </ingredient>
+                </ingredients>
+            </dish>
+            <dish name="Pasta">
+                <category type="day-to-day">
+                </category>
+                <timetocook>18</timetocook>
+                <minimumservings>1</minimumservings>
+                <ingredients>
+                    <ingredient name="macaroni">
+                        <count>100</count>
+                    </ingredient>
+                </ingredients>
+            </dish>
+        </dishes>
+    </candidate>
+</candidates>
